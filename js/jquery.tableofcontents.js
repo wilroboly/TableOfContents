@@ -48,6 +48,7 @@
 		base.toc = "";                               // We use this to build our TOC;
 		base.listStyle = null;                       // This will store the type of list
 		base.tags = ["h1","h2","h3","h4","h5","h6"]; // The six header tags
+		base.ignoreTagsClass = "";					 // Ignore all tags with the following classes
 
         
         base.init = function(){
@@ -74,7 +75,7 @@
 			var filtered_tags = base.tags.splice(base.options.startLevel - 1, base.options.depth);
 			
 			// Cache all the headings that match our new filter
-			base.$headings = base.$scope.find(filtered_tags.join(', '));
+			base.$headings = base.$scope.find(filtered_tags.join(', ')).filter(':not('+base.options.ignoreTagsClass+')');
 
 			
 			// If topLinks is enabled, set/get an id for the body element
