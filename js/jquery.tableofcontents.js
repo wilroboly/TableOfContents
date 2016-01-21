@@ -48,12 +48,13 @@
 		base.toc = "";                               // We use this to build our TOC;
 		base.listStyle = null;                       // This will store the type of list
 		base.tags = ["h1","h2","h3","h4","h5","h6"]; // The six header tags
-		base.ignoreTagsClass = "";					 // Ignore all tags with the following classes
+		//base.ignoreTagsClass = "";					 // Ignore all tags with the following classes
+		//base.tocNavClass = "";						 // You may add a class to each NAV depth
 
         
         base.init = function(){
 			// Merge the defaultOptions with any options passed in
-            base.options = $.extend({},$.TableOfContents.defaultOptions, options);
+            base.options = $.extend({},$.TableOfContents.defaultOptions, options);//tocNavClass
 
 			// Gets the scope. Defaults to the entire document if not specified
             if(typeof(scope) == "undefined" || scope == null) scope = document.body;
@@ -174,6 +175,8 @@
 		};
 		
 		base.changeDepth = function(new_depth, last){
+			base.options.tocNavClass;
+
 			if(last !== true) last = false;
 			
 			// If straight links, just change depth and return
@@ -189,7 +192,11 @@
 				// steps from h1 to h3 without an h2
 				var opening_tags = [];
 				for(var i = base.current_depth; i < new_depth; i++){
-					opening_tags.push('<' + base.listStyle + '>' + "\n");
+					var navTOCClass = '';
+						if (base.options.tocNavClass.length > 0) {
+						navTOCClass = ' class="'+ base.options.tocNavClass +'"';
+					}
+					opening_tags.push('<' + base.listStyle + navTOCClass + '>' + "\n");
 				};
 				var li = "<li>\n";
 				
@@ -297,7 +304,13 @@
 		// either position = fixed | absolute | relative
 		// Finally, the TOC wrapper must not be a UL or an LI or this setting will
 		// have no effect
-		proportionateSpacing: false
+		proportionateSpacing: false,
+
+		// No Nav element class
+		tocNavClass: "",
+
+		// ignore any Header tag which has this class
+		ignoreTagsClass: ""
 		
     };
 	
