@@ -2,8 +2,9 @@
 	TableOfContents Plugin for jQuery
 	
 	Programmed by Doug Neiner
-	
-	Version: 0.8
+ 	Modified by William Roboly
+
+	Version: 0.8.1
 	
 	Based on code and concept by Janko Jovanovic 
 	  in his article: http://www.jankoatwarpspeed.com/post/2009/08/20/Table-of-contents-using-jQuery.aspx
